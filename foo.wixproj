@@ -1,0 +1,33 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProductVersion>1.0.0</ProductVersion>
+    <DefineConstants>ProductVersion=$(ProductVersion)</DefineConstants>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>27e80d9b-d8b6-423a-a6ff-1d9c5b23bb31</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>foo-$(ProductVersion)</OutputName>
+    <OutputType>Package</OutputType>
+    <DefineSolutionProperties>false</DefineSolutionProperties>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug;ProductVersion=$(ProductVersion)</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="foo.wxs" />
+    <HarvestDirectory Include="items">
+      <DirectoryRefId>ItemDir</DirectoryRefId>
+      <ComponentGroupName>Items</ComponentGroupName>
+      <!-- <PreprocessorVariable>var.ItemDir</PreprocessorVariable> -->
+    </HarvestDirectory>
+    <WixExtension Include="WixUIExtension" />
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+</Project>

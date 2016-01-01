@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define ItemDir = "items" ?>
+  <Product Name="Foo"
+           Version="$(var.ProductVersion)"
+           Manufacturer="Foo Inc."
+           Language="1033"
+           UpgradeCode="0c8504c9-4e62-4e2c-9e1c-4fbe1c478b37"
+           Id="*">
+
+    <Package Description="Foo"
+             Manufacturer="Foo Inc."
+             Compressed="yes"
+             InstallerVersion="301" />
+
+    <MajorUpgrade AllowDowngrades="no"
+                  DowngradeErrorMessage="A newer version of this software is already installed."
+                  AllowSameVersionUpgrades="no" />
+
+    <Media Id="1" Cabinet="cabinet.cab" EmbedCab="yes" />
+
+    <Property Id="ARPCOMMENTS">
+      Foo package.
+    </Property>
+    <Property Id="ARPCONTACT">Foo Inc.</Property>
+    <Property Id="ARPURLINFOABOUT">https://www.example.com/</Property>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="PFiles">
+        <Directory Id="INSTALLDIR" Name="Foo">
+          <Component Id="readme">
+            <File Id="readme" Name="README.txt" Source="README.txt" />
+          </Component>
+          <Directory Id="ItemDir" />
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="Software"
+             Title="Foo"
+             AllowAdvertise="no"
+             ConfigurableDirectory="INSTALLDIR">
+      <ComponentRef Id="readme" />
+      <ComponentGroupRef Id="Items" />
+    </Feature>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    <UIRef Id="WixUI_InstallDir" />
+  </Product>
+</Wix>
