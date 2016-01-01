@@ -1,7 +1,7 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProductVersion>1.0.0</ProductVersion>
-    <DefineConstants>ProductVersion=$(ProductVersion)</DefineConstants>
+    <DefineConstants>ProductVersion=$(ProductVersion);ItemDir=items</DefineConstants>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>27e80d9b-d8b6-423a-a6ff-1d9c5b23bb31</ProjectGuid>
@@ -25,7 +25,7 @@
     <HarvestDirectory Include="items">
       <DirectoryRefId>ItemDir</DirectoryRefId>
       <ComponentGroupName>Items</ComponentGroupName>
-      <!-- <PreprocessorVariable>var.ItemDir</PreprocessorVariable> -->
+      <PreprocessorVariable>var.ItemDir</PreprocessorVariable>
     </HarvestDirectory>
     <WixExtension Include="WixUIExtension" />
   </ItemGroup>
